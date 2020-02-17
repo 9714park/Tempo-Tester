@@ -34,7 +34,11 @@ export class Triangle extends Component {
     };
 
     return (
-      <div ref={this.triangleRef} style={divStyle} className='triangle'></div>
+      <div
+        ref={this.triangleRef}
+        style={divStyle}
+        className={'triangle ' + this.props.className}
+        onAnimationEnd={() => this.props.resetAnimation()}></div>
     );
   }
 }
