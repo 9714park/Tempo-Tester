@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import Circle from "./shapes/Circle";
-import "./App.css";
+import React, { Component } from 'react';
+import Circle from './shapes/Circle';
+import './App.css';
+import Triangle from './shapes/Triangle';
 
 export class App extends Component {
   constructor(props) {
@@ -14,24 +15,25 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("click", this.onClickCreateShape);
+    window.addEventListener('click', this.onClickCreateShape);
   }
   componentWillUnmount() {
-    window.removeEventListener("click", this.onClickCreateShape);
+    window.removeEventListener('click', this.onClickCreateShape);
   }
 
   onClickCreateShape(e) {
     let mousePosition = {};
-    mousePosition["x"] = e.x;
-    mousePosition["y"] = e.y;
+    mousePosition['x'] = e.x;
+    mousePosition['y'] = e.y;
 
     this.setState({ coordinates: mousePosition });
   }
 
   render() {
     return (
-      <div id="screen">
-        <Circle />
+      <div id='screen'>
+        <Circle coordinates={this.state.coordinates} />
+        <Triangle coordinates={this.state.coordinates} />
       </div>
     );
   }
