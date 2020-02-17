@@ -19,7 +19,7 @@ export class Triangle extends Component {
     });
   }
 
-  getTriangleNewPosition = () => {
+  getNewPosition = () => {
     let { x, y } = this.props.coordinates;
     x = x - this.state.offsetWidth / 2;
     y = y - this.state.offsetHeight / 2;
@@ -27,18 +27,23 @@ export class Triangle extends Component {
   };
 
   render() {
-    let { x, y } = this.getTriangleNewPosition();
+    let { x, y } = this.getNewPosition();
 
     let divStyle = {
       transform: `translate3D(${x}px, ${y}px, 0px)`
     };
 
+    console.log(this.props);
+
     return (
       <div
         ref={this.triangleRef}
         style={divStyle}
-        className={'triangle ' + this.props.className}
-        onAnimationEnd={() => this.props.resetAnimation()}></div>
+        className={'triangle fade'}
+        /* onAnimationEnd={() => {
+          className = 'triangle';
+        }} */
+      ></div>
     );
   }
 }

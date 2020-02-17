@@ -37,6 +37,10 @@
   }
 }
 
+#screen {
+  position: relative;
+}
+
 .circle {
   height: 50px;
   width: 50px;
@@ -52,6 +56,7 @@
   border-width: 0 60px 103.9px 60px;
   border-color: transparent transparent #007bff transparent;
   visibility: hidden;
+  position: absolute;
 }
 
 .fade {

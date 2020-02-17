@@ -9,11 +9,11 @@ export class App extends Component {
 
     this.state = {
       coordinates: { x: 0, y: 0 },
-      animationState: 'paused',
-      fade: false
+      fade: false,
+      shapes: []
     };
 
-    this.onClickCreateShape = this.onClickCreateShape.bind(this);
+    // this.onClickCreateShape = this.onClickCreateShape.bind(this);
   }
 
   componentDidMount() {
@@ -24,40 +24,48 @@ export class App extends Component {
   }
 
   onClickCreateShape = event => {
-    this.beginAnimation(event).then();
+    this.getClickPosition(event)
+      .then(res => {
+        const { coordinates } = res;
+
+        const Shape = () => <Triangle coordinates={coordinates}></Triangle>;
+
+        const shapes = [...this.state.shapes, Shape];
+        this.setState({ shapes: shapes });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
-  beginAnimation = event => {
+  getClickPosition = event => {
     return new Promise((res, rej) => {
       let mousePosition = {};
       mousePosition['x'] = event.x;
       mousePosition['y'] = event.y;
 
-      this.setState({
-        coordinates: mousePosition,
-        animationState: 'running',
-        fade: true
+      res({
+        coordinates: mousePosition
       });
-      res();
-
-      // TODO: Error handling
     });
   };
 
   render() {
-    const fade = this.state.fade;
-
+    console.log(this.state.shapes);
     return (
       <div id='screen'>
         {/* <Circle coordinates={this.state.coordinates} /> */}
 
-        <Triangle
+        {/* <Triangle
           coordinates={this.state.coordinates}
           resetAnimation={() => {
             this.setState({ fade: false });
           }}
           className={fade ? 'fade' : ''}
-        />
+        /> */}
+
+        {this.state.shapes.length &&
+          this.state.shapes.map((Shape, i) => <Shape key={i} />)}
       </div>
     );
   }
