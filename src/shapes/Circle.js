@@ -19,7 +19,7 @@ export class Circle extends Component {
     });
   }
 
-  getCircleNewPosition = () => {
+  getNewPosition = () => {
     let { x, y } = this.props.coordinates;
     x = x - this.state.offsetWidth / 2;
     y = y - this.state.offsetHeight / 2;
@@ -27,13 +27,22 @@ export class Circle extends Component {
   };
 
   render() {
-    let { x, y } = this.getCircleNewPosition();
+    let { x, y } = this.getNewPosition();
 
     let divStyle = {
       transform: `translate3D(${x}px, ${y}px, 0px)`
     };
 
-    return <div ref={this.circleRef} style={divStyle} className='circle'></div>;
+    return (
+      <div
+        ref={this.circleRef}
+        style={divStyle}
+        className={'circle fade'}
+        /* onAnimationEnd={() => {
+          className = 'triangle';
+        }} */
+      ></div>
+    );
   }
 }
 
