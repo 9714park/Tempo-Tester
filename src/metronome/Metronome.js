@@ -17,6 +17,14 @@ export default class Metronome extends Component {
     this.click2 = new Audio(click2);
   }
 
+  componentDidMount() {
+    this.startStop();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   startStop = () => {
     this.timer = setInterval(this.playClick, (60 / this.state.bpm) * 1000);
     this.setState(
@@ -36,9 +44,6 @@ export default class Metronome extends Component {
     } else {
       this.click1.play();
     }
-    this.setState(state => ({
-      count: (state.count + 1) % state.beatsPerMeasure
-    }));
   };
 
   render() {

@@ -4,6 +4,7 @@ import Triangle from './shapes/Triangle';
 import './App.css';
 import Square from './shapes/Square';
 import Metronome from './metronome/Metronome';
+import Message from './message/Message';
 
 const SHAPES = {
   CIRCLE: 0,
@@ -22,6 +23,7 @@ export class App extends Component {
     };
 
     this.shapeIndexCounter = 0;
+    this.firstClick = true;
   }
 
   componentDidMount() {
@@ -32,18 +34,22 @@ export class App extends Component {
   }
 
   onClickCreateShape = event => {
-    this.getClickPosition(event)
-      .then(res => {
-        const { coordinates } = res;
+    if (this.firstClick) {
+      this.firstClick = false;
+    } else {
+      this.getClickPosition(event)
+        .then(res => {
+          const { coordinates } = res;
 
-        const Shape = this.getShape(coordinates);
+          const Shape = this.getShape(coordinates);
 
-        const shapes = [...this.state.shapes, Shape];
-        this.setState({ shapes: shapes });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+          const shapes = [...this.state.shapes, Shape];
+          this.setState({ shapes: shapes });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 
   getShape = coordinates => {
@@ -85,7 +91,8 @@ export class App extends Component {
   render() {
     return (
       <div id='screen'>
-        <Metronome></Metronome>
+        {/* <Message></Message> */}
+        {/* <Metronome></Metronome> */}
         {this.state.shapes.length ? (
           this.state.shapes.map((Shape, i) => <Shape key={i} />)
         ) : (

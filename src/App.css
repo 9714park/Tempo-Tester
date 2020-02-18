@@ -37,8 +37,16 @@
   }
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 #screen {
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 /*******************************************************/
@@ -46,7 +54,6 @@
 /*******************************************************/
 
 .circle {
-  height: 80px;
   width: 80px;
   background-color: rgb(64, 185, 27);
   border-radius: 50%;
