@@ -13,6 +13,8 @@ export class App extends Component {
       shapes: []
     };
 
+    this.isTriangle = true;
+
     // this.onClickCreateShape = this.onClickCreateShape.bind(this);
   }
 
@@ -28,7 +30,14 @@ export class App extends Component {
       .then(res => {
         const { coordinates } = res;
 
-        const Shape = () => <Triangle coordinates={coordinates}></Triangle>;
+        let Shape;
+        if (this.isTriangle) {
+          Shape = () => <Triangle coordinates={coordinates}></Triangle>;
+          this.isTriangle = false;
+        } else {
+          Shape = () => <Circle coordinates={coordinates}></Circle>;
+          this.isTriangle = true;
+        }
 
         const shapes = [...this.state.shapes, Shape];
         this.setState({ shapes: shapes });
@@ -51,21 +60,13 @@ export class App extends Component {
   };
 
   render() {
-    console.log(this.state.shapes);
     return (
       <div id='screen'>
-        {/* <Circle coordinates={this.state.coordinates} /> */}
-
-        {/* <Triangle
-          coordinates={this.state.coordinates}
-          resetAnimation={() => {
-            this.setState({ fade: false });
-          }}
-          className={fade ? 'fade' : ''}
-        /> */}
-
-        {this.state.shapes.length &&
-          this.state.shapes.map((Shape, i) => <Shape key={i} />)}
+        {this.state.shapes.length ? (
+          this.state.shapes.map((Shape, i) => <Shape key={i} />)
+        ) : (
+          <div></div>
+        )}
       </div>
     );
   }
