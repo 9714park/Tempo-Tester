@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import click1 from '../../public/res/click1.wav';
-import click2 from '../../public/res/click2.wav';
+import click1 from '../click1.wav';
+import click2 from '../click2.wav';
 
 export default class Metronome extends Component {
   constructor() {
@@ -16,31 +16,6 @@ export default class Metronome extends Component {
     this.click1 = new Audio(click1);
     this.click2 = new Audio(click2);
   }
-
-  //   handleBpmChange = e => {
-  //     const bpm = e.target.value;
-
-  //     if (this.state.playing) {
-  //       // Stop the current metronome
-  //       clearInterval(this.timer);
-
-  //       // Start a new metronome with updated BPM
-  //       this.timer = setInterval(this.playClick, (60 / bpm) * 1000);
-
-  //       this.setState({
-  //         count: 0,
-  //         bpm
-  //       });
-  //     } else {
-  //       // Otherwise update the BPM
-  //       this.setState({ bpm });
-  //     }
-  //   };
-
-  //   handleSubmit = e => {
-  //     e.preventDefault();
-  //     console.log(this.state.bpm);
-  //   };
 
   startStop = () => {
     this.timer = setInterval(this.playClick, (60 / this.state.bpm) * 1000);
@@ -67,7 +42,6 @@ export default class Metronome extends Component {
   };
 
   render() {
-    this.startStop();
     return null;
   }
 }
