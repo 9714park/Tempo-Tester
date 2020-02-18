@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import Circle from './shapes/Circle';
 import Triangle from './shapes/Triangle';
 import './App.css';
+import Square from './shapes/Square';
+
+const SHAPES = {
+  CIRCLE: 0,
+  TRIANGLE: 1,
+  SQUARE: 2
+};
 
 export class App extends Component {
   constructor(props) {
@@ -13,9 +20,7 @@ export class App extends Component {
       shapes: []
     };
 
-    this.isTriangle = true;
-
-    // this.onClickCreateShape = this.onClickCreateShape.bind(this);
+    this.shapeIndexCounter = 0;
   }
 
   componentDidMount() {
@@ -30,14 +35,7 @@ export class App extends Component {
       .then(res => {
         const { coordinates } = res;
 
-        let Shape;
-        if (this.isTriangle) {
-          Shape = () => <Triangle coordinates={coordinates}></Triangle>;
-          this.isTriangle = false;
-        } else {
-          Shape = () => <Circle coordinates={coordinates}></Circle>;
-          this.isTriangle = true;
-        }
+        const Shape = this.getShape(coordinates);
 
         const shapes = [...this.state.shapes, Shape];
         this.setState({ shapes: shapes });
@@ -45,6 +43,30 @@ export class App extends Component {
       .catch(err => {
         console.log(err);
       });
+  };
+
+  getShape = coordinates => {
+    switch (this.shapeIndexCounter) {
+      case SHAPES.CIRCLE:
+        this.incrementShapeIndexCounter();
+        return () => <Circle coordinates={coordinates}></Circle>;
+
+      case SHAPES.TRIANGLE:
+        this.incrementShapeIndexCounter();
+        return () => <Triangle coordinates={coordinates}></Triangle>;
+
+      case SHAPES.SQUARE:
+        this.incrementShapeIndexCounter();
+        return () => <Square coordinates={coordinates}></Square>;
+
+      default:
+        break;
+    }
+  };
+
+  incrementShapeIndexCounter = () => {
+    this.shapeIndexCounter =
+      (this.shapeIndexCounter + 1) % Object.keys(SHAPES).length;
   };
 
   getClickPosition = event => {

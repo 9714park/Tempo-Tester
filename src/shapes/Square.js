@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export class Triangle extends Component {
+export class Square extends Component {
   constructor(props) {
     super(props);
 
-    this.triangleRef = React.createRef();
+    this.squareRef = React.createRef();
 
     this.state = {
       offsetWidth: 0,
@@ -14,8 +14,8 @@ export class Triangle extends Component {
 
   componentDidMount() {
     this.setState({
-      offsetWidth: this.triangleRef.current.offsetWidth,
-      offsetHeight: this.triangleRef.current.offsetHeight
+      offsetWidth: this.squareRef.current.offsetWidth,
+      offsetHeight: this.squareRef.current.offsetHeight
     });
   }
 
@@ -33,11 +33,13 @@ export class Triangle extends Component {
       transform: `translate3D(${x}px, ${y}px, 0px)`
     };
 
+    console.log(this.props);
+
     return (
       <div
-        ref={this.triangleRef}
+        ref={this.squareRef}
         style={divStyle}
-        className={'triangle fade'}
+        className={'square fade'}
         /* onAnimationEnd={() => {
           className = 'triangle';
         }} */
@@ -46,4 +48,4 @@ export class Triangle extends Component {
   }
 }
 
-export default Triangle;
+export default Square;
