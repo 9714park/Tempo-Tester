@@ -41,24 +41,33 @@
   position: relative;
 }
 
+/*******************************************************/
+/*********************** Shapes ************************/
+/*******************************************************/
+
 .circle {
-  height: 50px;
-  width: 50px;
+  height: 80px;
+  width: 80px;
   background-color: rgb(64, 185, 27);
   border-radius: 50%;
   display: inline-block;
+  visibility: hidden;
+  position: absolute;
 }
 
 .triangle {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 0 60px 103.9px 60px;
+  border-width: 0 50px 86.6px 50px;
   border-color: transparent transparent #007bff transparent;
   visibility: hidden;
   position: absolute;
 }
 
+/*******************************************************/
+/********************* Animations **********************/
+/*******************************************************/
 .fade {
   animation: fade-out-keyframes 1s;
 }
